@@ -1,28 +1,40 @@
 $(document).ready(function () {
+    // <script type="text/javascript" src="slideshow.js"></script>
+
+    //    document.getElementById("test").hidden=false
 
     $(document).on("click", "#start", function () {
+        // document.getElementById(".answer-container").hidden=true;
+       
         renderQuiz();
         timer();
-    })
+
+    });
+    
+
+    $('#start').click(function() {
+        $(this).hide();
+        // $("")
+    });
+
+    // $(document).on("click", "#done", function () {
+    //     timer();
+
+    // });
 
     var dundies = 0;
     var demerits = 0;
-
-    // var countDown = 30;
-    // var timerOn = false;
-
-    // variables 
+  
     // functions
     // logic
 
     var officeQuestions = [{
         question: "Who started the fire?",
         choices: ["Ryan", "Michael", "Dwight", "Kevin"],
-        // images:  ["../images/.gif"],
         correctAnswer: 0
     }, {
         question: "Who makes a mean chili?",
-        choices: ["Phylis", "Kevin", "Creed", "Dwight"],
+        choices: ["Phyllis", "Kevin", "Creed", "Dwight"],
         correctAnswer: 1
 
     }, {
@@ -68,17 +80,19 @@ $(document).ready(function () {
     }
 
     ];
-    var counter = 30;
-    var index = 0;
 
-    // function init(){
-    //     $("#id *").hide();
-    //     $("#start").show();
+
+    // function init() {
+
+    //     document.getElementByClass(".answer-container", ".questions-container").style.visibility = "hidden";
+    //     // document.getElementById(id).style.visibility = "visible";
+
     // };
 
     // init();
-
+    var index = 0;
     function renderQuiz() {
+        
         $("#question").text(officeQuestions[index].question)
         $('#button1').text(officeQuestions[index].choices[0])
         $('#button2').text(officeQuestions[index].choices[1])
@@ -93,7 +107,7 @@ $(document).ready(function () {
     function timer() {
 
         (function () {
-            var counter = 200;
+            var counter = 90;
 
             setInterval(function () {
                 counter--;
@@ -112,10 +126,14 @@ $(document).ready(function () {
 
         })();
 
-    }
+    };
+
+    var dundieGif = ["https://media.giphy.com/media/12Ez4WVD11ko4o/giphy.gif"];
+    var demeritGif = ["https://giphy.com/gifs/1dIoHBbyFpWzK0Div8/html5", "https://giphy.com/gifs/1xkMucz3jc5AGB4elL/html5", "https://media.giphy.com/media/F4OaLYkGXIUgM/giphy.gif"];
+
 
     $(document).on("click", ".answers", function (event) {
-        // event.preventDefault()
+        //  event.preventDefault()
         // console.log("we got clicked");
         // console.log(event.target)
 
@@ -125,34 +143,39 @@ $(document).ready(function () {
         console.log("this should be 0: " + officeQuestions[index].correctAnswer)
 
         if ($(event.target).attr("data-choice") == officeQuestions[index].correctAnswer) {
-            console.log("correct!");
             index++;
-            alert("You earned a Dundie");
+            swal("You earned a Dundie");
             dundies++;
+            let gif1 = dundieGif[Math.floor(Math.random() * dundieGif.length)];
+            // $("#gifs").html('<img src="+ gif1 +"/>');
             $("#wins").html(dundies);
-            renderQuiz();
+
         } else {
-            console.log("incorrect");
             index++;
             demerits++;
+            let gif2 = demeritGif[Math.floor(Math.random() * demeritGif.length)];
+            // $("#gifs").html("<img src='+ gif2 +'/>");
             $("#losses").html(demerits);
-            alert("Alert you have received one demerit, you dont want three of those. Three demerits and you'll receive a citation. Five citations and youre looking at a violation. Four of those and youll receive a verbal warning. Keep it up and you're looking at a written warning. Two of those, that will land you in a world of hurt, in the form of a disciplinary review. YOU HAVE RECEIVED A FULL DISADULATION")
-            renderQuiz();
+            swal("Alert you have received one demerit, you dont want three of those... Three demerits and you'll receive a citation. Five citations and youre looking at a violation... Four of those and youll receive a verbal warning... Keep it up and you're looking at a written warning... Two of those, that will land you in a world of hurt, in the form of a disciplinary review.... YOU HAVE RECEIVED A FULL DISADULATION")
+
         }
-        // grab the value of whatever you're clicking data-choice="0"
-        // this
-        // check if the value of what was click equals officeQuestion[i].correctAnswer
-        // ++dundies
+        if ((demerits + dundies) == officeQuestions.length) {
 
-
+            $("#question", ".answers").hide();
+        } else {
+            renderQuiz();
+        };
+//make zero show on dundies and demerits at the beginning
+//need to hide questions and answers when all have been answered
+//need to stop timer when last question has been answered 
+//how to make gifs actually work when questions is answered
+  
     })
-    // first create countdown timer as var give it function 
-    // then put into renderquiz and then 
+
+//   $(".hide-me", ".answers").click(function() {
+//         $(this).hide();
+//     });
+
+
 
 });
-//stretch goals!!!! icebox
-// function nextQuestion() {
-//     index++;
-//     renderQuiz()
-// }
-// $('#button1').click(next)

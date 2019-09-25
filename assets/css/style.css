@@ -1,4 +1,25 @@
 body {
-    background-image: url("https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwipt5rF_OfkAhXYFzQIHSlgAioQjRx6BAgBEAQ&url=http%3A%2F%2Fwww.givememyremote.com%2Fremote%2F2013%2F05%2F16%2Fthe-office-time-capsule-gmmrs-very-first-office-post%2F&psig=AOvVaw3WMb1i_mxpDTRbzheOz_Kt&ust=1569363427819767");
+    background-image: url("https://media.giphy.com/media/y5yzypjVc9u3S/giphy.gif");
     background-size: cover;
+    margin:0 auto;
+    width:400px;
+    text-align: center;
+}
+
+/* .wrapWithBackgroundImage {
+    background-image: url("https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwi564qg_ezkAhUQXa0KHWPTB54QjRx6BAgBEAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDunder_Mifflin&psig=AOvVaw3VQcU2eEgzfbqf-X08TREn&ust=1569535416726834");
+}
+.invisibleLink {
+    display: block;
+    left: 55px; top: 55px;
+    position: absolute;
+    height: 55px;
+    width: 55px;
+} */
+.container {
+    background-color: black;
+    color: white;
+    font-family: 'Anton', sans-serif;
+    font: bold;
+    padding-left: 40px;
 }
