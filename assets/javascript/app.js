@@ -1,41 +1,26 @@
 $(document).ready(function () {
-    // <script type="text/javascript" src="slideshow.js"></script>
-
-    //    document.getElementById("test").hidden=false
 
     $(document).on("click", "#start", function () {
-        // document.getElementById(".answer-container").hidden=true;
-       
         renderQuiz();
         timer();
-
     });
-    
 
-    $('#start').click(function() {
+
+    $('#start').click(function () {
         $(this).hide();
-        // $("")
     });
 
-    $('.questions-container').click(function() {
+    $('.questions-container').click(function () {
         $(this).hide();
-        // $("")
     });
 
-    // $(document).on("click", "#done", function () {
-    //     timer();
-
-    // });
 
     var dundies = 0;
     var demerits = 0;
-  
-    // functions
-    // logic
 
     var officeQuestions = [{
         question: "Who started the fire?",
-        choices: ["Ryan", "Michael", "Dwight", "Kevin"],
+        choices: ["Ryan", "Michael", "Jim", "Kevin"],
         correctAnswer: 0
     }, {
         question: "Who makes a mean chili?",
@@ -80,32 +65,18 @@ $(document).ready(function () {
     }, {
         question: "Which historical figure made a suprise apperance at Phyllis' wedding shower?",
         choices: ["Thomas Jefferson", "George Washington", "Benjamin Franklin", "John Adams"],
-        correctAnswer: 3
+        correctAnswer: 2
 
-    }
+    }];
 
-    ];
-
-
-    // function init() {
-
-    //     document.getElementByClass(".answer-container", ".questions-container").style.visibility = "hidden";
-    //     // document.getElementById(id).style.visibility = "visible";
-
-    // };
-
-    // init();
     var index = 0;
     function renderQuiz() {
-        
+
         $("#question").text(officeQuestions[index].question)
         $('#button1').text(officeQuestions[index].choices[0])
         $('#button2').text(officeQuestions[index].choices[1])
         $('#button3').text(officeQuestions[index].choices[2])
         $('#button4').text(officeQuestions[index].choices[3])
-
-
-
 
     };
 
@@ -119,45 +90,50 @@ $(document).ready(function () {
                 if (counter >= 0) {
                     var span = document.getElementById("count");
                     span.innerText = counter;
-
                 }
-                // Display 'counter' wherever you want to display it.
+
                 if (counter === 0) {
-                    //    alert('this is where it happens');
+                    $("#gifs").html('<img class="picture" src="assets/images/noo.gif">');
+                    $(".question-container, .answer-container").toggle();
                     clearInterval(counter);
                 }
 
             }, 1000);
 
         })();
-
     };
-
-    
-    //var demeritGif = ["https://giphy.com/gifs/1dIoHBbyFpWzK0Div8/html5", "https://giphy.com/gifs/1xkMucz3jc5AGB4elL/html5", "https://media.giphy.com/media/F4OaLYkGXIUgM/giphy.gif"];
 
     var imgIndex = 0;
     var imgIndex2 = 0;
+    var hasAlertedDundies = false;
+    var hasAlertedDemerits = false;
     
-
+    
     $(document).on("click", ".answers", function (event) {
         //  event.preventDefault()
-        // console.log("we got clicked");
-        // console.log(event.target)
+        // console.log($(event.target).attr("data-choice"))
 
-        //this is what looks at the data-choice on each question!
-        console.log($(event.target).attr("data-choice"))
+        // console.log("this should be 0: " + officeQuestions[index].correctAnswer)
 
-        console.log("this should be 0: " + officeQuestions[index].correctAnswer)
-
-        var dundieGif = ["yeah.gif", "fingers.gif", "roof.gif", "champagne.gif", "nailedit.gif", "dance.webp", "wink.webp", "pew.gif", "true.webp", "jump.webp"];
-        var demeritGif = ["nope.webp", "cut.webp", "dontlikethat.gif", "rubeyes.gif", "slightno.gif", "ryan.gif", "ignorant.gif"];
-
+        var dundieGif = ["yeah.gif", "fingers.gif", "roof.gif", "champagne.gif", "dance.webp", "wink.webp", "pew.gif", "true.webp", "jump.webp"];
+        var demeritGif = ["nope.webp", "cut.webp", "dontlikethat.gif", "rubeyes.gif", "slightno.gif", "false.webp", "ryan.gif", "stare.gif", "comeon.gif", "teeth.gif"];
+        function alertDundies() {
+            if (!hasAlertedDundies) {
+                swal("You earned a Dundie");
+            }
+            hasAlertedDundies = true;
+        }
+        function alertDemerits() {
+            if (!hasAlertedDemerits) {
+                swal("Alert you have received one demerit, you dont want three of those... Three demerits and you'll receive a citation. Five citations and youre looking at a violation... Four of those and youll receive a verbal warning... Keep it up and you're looking at a written warning... Two of those, that will land you in a world of hurt, in the form of a disciplinary review.... YOU HAVE RECEIVED A FULL DISADULATION")
+            }
+            hasAlertedDemerits = true;
+        }
         if ($(event.target).attr("data-choice") == officeQuestions[index].correctAnswer) {
             index++;
-            swal("You earned a Dundie");
+            // swal("You earned a Dundie");
+            alertDundies();
             dundies++;
-            // let gif1 = dundieGif[Math.floor(Math.random() * dundieGif.length)];
             $("#gifs").html('<img class="picture" src="assets/images/' + dundieGif[imgIndex] + '">');
             imgIndex++;
             (console.log(imgIndex));
@@ -165,29 +141,26 @@ $(document).ready(function () {
 
         } else {
             index++;
+            alertDemerits();
             demerits++;
-            // let gif2 = demeritGif[Math.floor(Math.random() * demeritGif.length)];
             $("#gifs").html('<img class="picture" src="assets/images/' + demeritGif[imgIndex2] + '">');
             imgIndex2++;
             $("#losses").html(demerits);
-            swal("Alert you have received one demerit, you dont want three of those... Three demerits and you'll receive a citation. Five citations and youre looking at a violation... Four of those and youll receive a verbal warning... Keep it up and you're looking at a written warning... Two of those, that will land you in a world of hurt, in the form of a disciplinary review.... YOU HAVE RECEIVED A FULL DISADULATION")
-
+            
         }
         if ((demerits + dundies) == officeQuestions.length) {
             $(".question-container, .answer-container, #timeElm").toggle();
+            $("#gifs").html('<img class="picture" src="assets/images/nailedit.gif">');
+            swal("ALL DONE! HOPE YOU WEREN'T AN IGNORANT SLUT! XOXO-Gossip girl--Michael Scott");
         } else {
             renderQuiz();
         };
-//make zero show on dundies and demerits at the beginning
-//need to hide questions and answers when all have been answered
-//need to stop timer when last question has been answered 
-//how to make gifs actually work when questions is answered
-  
+
+        //need to stop timer when last question has been answered 
+        //make alert stop after alerting once for each. 
+
     })
 
-//   $(".hide-me", ".answers").click(function() {
-//         $(this).hide();
-//     });
 
 
 

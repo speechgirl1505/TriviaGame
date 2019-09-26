@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://media.giphy.com/media/y5yzypjVc9u3S/giphy.gif");
+    background-image: url("https://media.giphy.com/media/czKNwL7pXWHCw/giphy.gif");
     background-size: cover;
     margin:0 auto;
     width:400px;
@@ -17,14 +17,26 @@ body {
     height: 55px;
     width: 55px;
 } */
+h4, #losses {
+    padding: 4px
+}
 .container {
-    background-color: black;
+    /* background-color: black; */
     color: white;
     font-family: 'Anton', sans-serif;
     font: bold;
-    margin-left: 90px;
+    /* margin-left: 150px; */
+}
+
+.question-container {
+    padding: 20px;
 }
 
 .picture {
     width: 100%;
+    padding-top: 10px;
+}
+
+#timeElm {
+    padding-top: 10px;
 }
