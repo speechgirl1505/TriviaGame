@@ -94,6 +94,7 @@ $(document).ready(function () {
 
                 if (counter === 0) {
                     $("#gifs").html('<img class="picture" src="assets/images/noo.gif">');
+                    swal("You knew exactly what to do. But in a much more real sense, you had no idea what to do. And apparently that happened on this quiz cause you are out of time!!")
                     $(".question-container, .answer-container").toggle();
                     clearInterval(counter);
                 }
@@ -131,7 +132,6 @@ $(document).ready(function () {
         }
         if ($(event.target).attr("data-choice") == officeQuestions[index].correctAnswer) {
             index++;
-            // swal("You earned a Dundie");
             alertDundies();
             dundies++;
             $("#gifs").html('<img class="picture" src="assets/images/' + dundieGif[imgIndex] + '">');
