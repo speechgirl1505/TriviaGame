@@ -17,6 +17,11 @@ $(document).ready(function () {
         // $("")
     });
 
+    $('.questions-container').click(function() {
+        $(this).hide();
+        // $("")
+    });
+
     // $(document).on("click", "#done", function () {
     //     timer();
 
@@ -73,8 +78,8 @@ $(document).ready(function () {
         correctAnswer: 0
 
     }, {
-        question: "After Stanley has a heart attack, who was causing everyone to be stressed?",
-        choices: ["Dwight", "Michael", "Kelly", "Creed"],
+        question: "Which historical figure made a suprise apperance at Phyllis' wedding shower?",
+        choices: ["Thomas Jefferson", "George Washington", "Benjamin Franklin", "John Adams"],
         correctAnswer: 1
 
     }
@@ -128,9 +133,12 @@ $(document).ready(function () {
 
     };
 
-    var dundieGif = ["https://media.giphy.com/media/12Ez4WVD11ko4o/giphy.gif"];
-    var demeritGif = ["https://giphy.com/gifs/1dIoHBbyFpWzK0Div8/html5", "https://giphy.com/gifs/1xkMucz3jc5AGB4elL/html5", "https://media.giphy.com/media/F4OaLYkGXIUgM/giphy.gif"];
+    
+    //var demeritGif = ["https://giphy.com/gifs/1dIoHBbyFpWzK0Div8/html5", "https://giphy.com/gifs/1xkMucz3jc5AGB4elL/html5", "https://media.giphy.com/media/F4OaLYkGXIUgM/giphy.gif"];
 
+    var imgIndex = 0;
+    var imgIndex2 = 0;
+    
 
     $(document).on("click", ".answers", function (event) {
         //  event.preventDefault()
@@ -142,26 +150,31 @@ $(document).ready(function () {
 
         console.log("this should be 0: " + officeQuestions[index].correctAnswer)
 
+        var dundieGif = ["andy.giphy.gif", "fingers.gif", "roof.gif", "champagne.gif", "nailedit.gif", "dance.webp", "wink.webp", "pew.gif", "true.webp", "jump.webp"];
+        var demeritGif = ["nope.webp", "cut.webp", "dontlikethat.gif", "rubeyes.gif", "slightno.gif"];
+
         if ($(event.target).attr("data-choice") == officeQuestions[index].correctAnswer) {
             index++;
             swal("You earned a Dundie");
             dundies++;
-            let gif1 = dundieGif[Math.floor(Math.random() * dundieGif.length)];
-            // $("#gifs").html('<img src="+ gif1 +"/>');
+            // let gif1 = dundieGif[Math.floor(Math.random() * dundieGif.length)];
+            $("#gifs").html('<img class="picture" src="assets/images/' + dundieGif[imgIndex] + '">');
+            imgIndex++;
+            (console.log(imgIndex));
             $("#wins").html(dundies);
 
         } else {
             index++;
             demerits++;
-            let gif2 = demeritGif[Math.floor(Math.random() * demeritGif.length)];
-            // $("#gifs").html("<img src='+ gif2 +'/>");
+            // let gif2 = demeritGif[Math.floor(Math.random() * demeritGif.length)];
+            $("#gifs").html('<img class="picture" src="assets/images/' + demeritGif[imgIndex2] + '">');
+            imgIndex2++;
             $("#losses").html(demerits);
             swal("Alert you have received one demerit, you dont want three of those... Three demerits and you'll receive a citation. Five citations and youre looking at a violation... Four of those and youll receive a verbal warning... Keep it up and you're looking at a written warning... Two of those, that will land you in a world of hurt, in the form of a disciplinary review.... YOU HAVE RECEIVED A FULL DISADULATION")
 
         }
         if ((demerits + dundies) == officeQuestions.length) {
-
-            $("#question", ".answers").hide();
+            $(".question-container, .answer-container, #timeElm").toggle();
         } else {
             renderQuiz();
         };
