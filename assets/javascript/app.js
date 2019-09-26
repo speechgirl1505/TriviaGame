@@ -80,7 +80,7 @@ $(document).ready(function () {
     }, {
         question: "Which historical figure made a suprise apperance at Phyllis' wedding shower?",
         choices: ["Thomas Jefferson", "George Washington", "Benjamin Franklin", "John Adams"],
-        correctAnswer: 1
+        correctAnswer: 3
 
     }
 
@@ -150,8 +150,8 @@ $(document).ready(function () {
 
         console.log("this should be 0: " + officeQuestions[index].correctAnswer)
 
-        var dundieGif = ["andy.giphy.gif", "fingers.gif", "roof.gif", "champagne.gif", "nailedit.gif", "dance.webp", "wink.webp", "pew.gif", "true.webp", "jump.webp"];
-        var demeritGif = ["nope.webp", "cut.webp", "dontlikethat.gif", "rubeyes.gif", "slightno.gif"];
+        var dundieGif = ["yeah.gif", "fingers.gif", "roof.gif", "champagne.gif", "nailedit.gif", "dance.webp", "wink.webp", "pew.gif", "true.webp", "jump.webp"];
+        var demeritGif = ["nope.webp", "cut.webp", "dontlikethat.gif", "rubeyes.gif", "slightno.gif", "ryan.gif", "ignorant.gif"];
 
         if ($(event.target).attr("data-choice") == officeQuestions[index].correctAnswer) {
             index++;
